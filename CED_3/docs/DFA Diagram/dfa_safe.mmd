@@ -1,0 +1,16 @@
+%% DFA para Safe
+stateDiagram-v2
+    [*] --> q0
+
+    q0 --> q1: PR
+    q0 --> q2: OTR
+
+    q1 --> q1: PR
+    q1 --> q2: OTR
+
+    q2 --> q2: *
+
+    classDef accept fill:#cfc,stroke:#090,stroke-width:2px;
+    class q0,q1 accept;
+
+    note right of q0: PR = PRINT_CALL\nOTR = HARDCODED_PASSWORD, API_KEY, HARDCODED_API_KEY, IP_ADDRESS, SUSPICIOUS_URL, TODO_COMMENT\n* = cualquier etiqueta

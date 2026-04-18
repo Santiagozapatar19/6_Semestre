@@ -1,0 +1,13 @@
+%% FST para Transformation Module
+stateDiagram-v2
+    [*] --> q0
+
+    q0 --> q0: HARDCODED_SECRET / REWRITE_SECRET
+    q0 --> q0: HARDCODED_API_KEY / REWRITE_API_KEY
+    q0 --> q0: SENSITIVE_PRINT / REMOVE_PRINT
+    q0 --> q0: OTHER / KEEP
+
+    classDef accept fill:#cfc,stroke:#090,stroke-width:2px;
+    class q0 accept;
+
+    note right of q0: Estado unico del FST\nq0 es inicial y final\nEtiqueta ENTRADA / ACCION

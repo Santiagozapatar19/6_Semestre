@@ -1,0 +1,73 @@
+[
+  {
+    "name": "roles",
+    "fields": [
+      { "name": "_id", "type": "ObjectId", "required": true },
+      { "name": "name", "type": "String", "required": true, "unique": true },
+      { "name": "description", "type": "String", "required": false }
+    ]
+  },
+  {
+    "name": "permissions",
+    "fields": [
+      { "name": "_id", "type": "ObjectId", "required": true },
+      { "name": "name", "type": "String", "required": true, "unique": true },
+      { "name": "description", "type": "String", "required": false }
+    ]
+  },
+  {
+    "name": "roles_permissions",
+    "fields": [
+      { "name": "_id", "type": "ObjectId", "required": true },
+      { "name": "roleId", "type": "ObjectId", "required": true, "ref": "roles" },
+      { "name": "permissionId", "type": "ObjectId", "required": true, "ref": "permissions" }
+    ]
+  },
+  {
+    "name": "users",
+    "fields": [
+      { "name": "_id", "type": "ObjectId", "required": true },
+      { "name": "name", "type": "String", "required": true },
+      { "name": "email", "type": "String", "required": true, "unique": true },
+      { "name": "password", "type": "String", "required": true },
+      { "name": "cellphone", "type": "String", "required": false },
+      { "name": "roleId", "type": "ObjectId", "required": true, "ref": "roles" },
+      { "name": "createdAt", "type": "Date", "required": true },
+      { "name": "updatedAt", "type": "Date", "required": true }
+    ]
+  },
+  {
+    "name": "courses",
+    "fields": [
+      { "name": "_id", "type": "ObjectId", "required": true },
+      { "name": "name", "type": "String", "required": true },
+      { "name": "description", "type": "String", "required": false },
+      { "name": "professorId", "type": "ObjectId", "required": true, "ref": "users" },
+      { "name": "createdAt", "type": "Date", "required": true },
+      { "name": "updatedAt", "type": "Date", "required": true }
+    ]
+  },
+  {
+    "name": "enrollments",
+    "fields": [
+      { "name": "_id", "type": "ObjectId", "required": true },
+      { "name": "studentId", "type": "ObjectId", "required": true, "ref": "users" },
+      { "name": "courseId", "type": "ObjectId", "required": true, "ref": "courses" },
+      { "name": "enrollmentDate", "type": "Date", "required": true },
+      { "name": "status", "type": "String", "required": false }
+    ]
+  },
+  {
+    "name": "grades",
+    "fields": [
+      { "name": "_id", "type": "ObjectId", "required": true },
+      { "name": "studentId", "type": "ObjectId", "required": true, "ref": "users" },
+      { "name": "courseId", "type": "ObjectId", "required": true, "ref": "courses" },
+      { "name": "grade", "type": "Number", "required": true },
+      { "name": "comment", "type": "String", "required": false },
+      { "name": "date", "type": "Date", "required": true },
+      { "name": "createdAt", "type": "Date", "required": true },
+      { "name": "updatedAt", "type": "Date", "required": true }
+    ]
+  }
+]

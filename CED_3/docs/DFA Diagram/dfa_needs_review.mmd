@@ -1,0 +1,22 @@
+%% DFA para Needs Review
+stateDiagram-v2
+    [*] --> q0
+
+    q0 --> q1: CR
+    q0 --> q2: SUS
+    q0 --> q0: PR
+
+    q1 --> q4: ESC
+    q1 --> q1: CR
+    q1 --> q3: TC
+
+    q2 --> q3: CR
+    q2 --> q2: SUS, PR
+
+    q3 --> q3: *
+    q4 --> q4: *
+
+    classDef accept fill:#cfc,stroke:#090,stroke-width:2px;
+    class q1,q2,q3 accept;
+
+    note right of q0: CR = HARDCODED_PASSWORD, API_KEY, HARDCODED_API_KEY\nSUS = SUSPICIOUS_URL, IP_ADDRESS, TODO_COMMENT\nPR = PRINT_CALL\nESC = PRINT_CALL, IP_ADDRESS, SUSPICIOUS_URL\nTC = TODO_COMMENT\n* = cualquier etiqueta
