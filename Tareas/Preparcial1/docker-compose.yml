@@ -1,0 +1,29 @@
+services:
+    mongo:
+        image: mongo:8.0.12
+        container_name: mongo
+        restart: always
+        ports:
+            - "${MONGO_PORT}:27017"
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+            MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+        volumes:
+            - mongo_data:/data/db
+
+    express:
+        build: .
+        container_name: express-app
+        restart: always
+        ports:
+            - "${APP_PORT}:3000"
+        environment:
+            PORT: ${PORT}
+            MONGO_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017
+            MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+        depends_on:
+            - mongo
+
+volumes:
+    mongo_data:
